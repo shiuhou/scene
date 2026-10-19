@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!--
+  Standalone Gazebo Classic example. Add this directory to GAZEBO_MODEL_PATH,
+  then run: gazebo examples/sentry_lidar_demo.sdf
+  The ray sensor publishes on Gazebo transport ~/sentry_lidar/scan. For ROS 2,
+  add the optional gazebo_ros_ray_sensor plugin shown in README.md.
+-->
+<sdf version="1.6">
+  <world name="rmuc2027_sentry_lidar_demo">
+    <gravity>0 0 -9.81</gravity>
+    <include>
+      <uri>model://rmuc2027_sentry_field</uri>
+      <name>rmuc2027_sentry_field</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+    <model name="sentry_lidar_demo">
+      <pose>0 -4.0 0.22 0 0 0</pose>
+      <link name="base_link">
+        <inertial><mass>8.0</mass><inertia><ixx>0.2</ixx><iyy>0.2</iyy><izz>0.2</izz></inertia></inertial>
+        <collision name="base_collision"><geometry><cylinder><radius>0.22</radius><length>0.18</length></cylinder></geometry></collision>
+        <visual name="base_visual"><geometry><cylinder><radius>0.22</radius><length>0.18</length></cylinder></geometry><material><ambient>0.12 0.16 0.20 1</ambient><diffuse>0.12 0.16 0.20 1</diffuse></material></visual>
+        <sensor name="sentry_lidar" type="ray">
+          <pose>0 0 0.18 0 0 0</pose>
+          <always_on>true</always_on>
+          <visualize>true</visualize>
+          <update_rate>15</update_rate>
+          <topic>sentry_lidar/scan</topic>
+          <ray>
+            <scan><horizontal><samples>720</samples><resolution>1</resolution><min_angle>-3.14159265</min_angle><max_angle>3.14159265</max_angle></horizontal></scan>
+            <range><min>0.12</min><max>30.0</max><resolution>0.01</resolution></range>
+            <noise><type>gaussian</type><mean>0.0</mean><stddev>0.01</stddev></noise>
+          </ray>
+        </sensor>
+      </link>
+    </model>
+    <gui><camera name="user_camera"><pose>18 -21 22 0 0.65 2.42</pose></camera></gui>
+  </world>
+</sdf>

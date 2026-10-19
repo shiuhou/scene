@@ -1,0 +1,29 @@
+{
+  "package": "rmuc2027_sentry_field",
+  "version": "1.0.0",
+  "units": "metres",
+  "frame": "Z-up; origin at nominal field centre; legacy MuJoCo world coordinates",
+  "visual_source": {
+    "library_file": "RMUC2027_Blender_beauty_package.zip",
+    "blend": "RMUC2027_MuJoCo_Blender_beauty.blend",
+    "export": "Compact procedural visual LOD (rmuc2027_field_scene.py) for pushed package; full beauty blend retained in Library",
+    "notes": "Visual-only LOD; replace with full RMUC2027_MuJoCo_Blender_beauty.blend export for high-detail rendering. Blender NAV_* curves are not used for collision."
+  },
+  "collision_source": {
+    "file": "meshes/field_collision.obj",
+    "generator": "tools/build_collision.py",
+    "method": "Low-complexity boxes and a 24-sided cylinder from published field dimensions and legacy MuJoCo layout",
+    "materials": false,
+    "navigation_aids_included": false,
+    "notes": "Proxy collision, not a part-level CAD/BRep collision mesh."
+  },
+  "references": [
+    "https://github.com/shiuhou/scene",
+    "https://github.com/CosmosMount/rm_mjcf"
+  ],
+  "known_limitations": [
+    "Library delivery did not include a directly loadable MuJoCo source tree.",
+    "Tunnel shells and small mechanisms are intentionally conservative approximations.",
+    "Verify dimensions and clearances against measured field/CAD data before competition use."
+  ]
+}
